@@ -1,0 +1,73 @@
+debug: true
+
+server:
+  port: 9090
+
+
+
+spring:
+  profiles:
+    active: "dev"
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: mysql
+    url: jdbc:mysql://192.168.145.44:5506/creditfront23?useUnicode=true&amp;amp;characterEncoding=UTF-8
+  jpa:
+      database-platform: org.hibernate.dialect.MySQL5Dialect
+  mvc:
+    static-path-pattern: /static/**
+
+
+
+
+
+# 日志输出配置
+logging:
+  file:
+    max-size: 10MB
+    max-history:
+  path: /logs
+  level:
+    com.ls: debug
+
+
+---
+# 开发环境配置
+spring:
+  profiles: dev
+server:
+  port: 8081
+
+
+
+---
+# docker 环境配置
+spring:
+  profiles: docker
+server:
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    data-username: root
+    data-password: mysql
+    url: jdbc:mysql://192.168.145.44:5506/creditfront23?useUnicode=true&amp;amp;characterEncoding=UTF-8
+
+  jpa:
+      database-platform: org.hibernate.dialect.MySQL5Dialect
+---
+# uat环境配置
+spring:
+  profiles: uat
+server:
+  port: 8083
+
+---
+
+spring:
+  profiles: pro
+server:
+  port: 8084
